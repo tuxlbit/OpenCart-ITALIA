@@ -13,16 +13,17 @@ rm -f "$OUT"
 
 cd "$ROOT"
 zip -r -q "$OUT" . \
-	-x '.git/*' '.git' \
+	-x '.git/*' \
 	-x 'dist/*' \
 	-x 'build.sh' \
 	-x 'config.php' 'admin/config.php' \
-	-x 'system/storage/cache/*' 'system/storage/logs/*' 'system/storage/session/*' \
-	-x 'system/storage/upload/*' 'system/storage/backup/*' 'system/storage/marketplace/*' \
-	-x 'image/cache/*' \
-	-x '*.DS_Store' 'Thumbs.db'
+	-x 'system/storage/cache/template/*' \
+	-x 'system/storage/logs/*.log' \
+	-x 'system/storage/session/sess_*' \
+	-x 'image/cache/catalog/*' \
+	-x '*.DS_Store' 'Thumbs.db' 'desktop.ini'
 
-# I due file di configurazione devono esistere vuoti e scrivibili nell'archivio
+# config.php e admin/config.php vanno nell'archivio vuoti e scrivibili
 TMP="$(mktemp -d)"
 : > "$TMP/config.php"
 mkdir -p "$TMP/admin"
