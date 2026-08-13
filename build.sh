@@ -14,6 +14,7 @@ rm -f "$OUT"
 cd "$ROOT"
 zip -r -q "$OUT" . \
 	-x '.git/*' \
+	-x '.github/*' \
 	-x 'dist/*' \
 	-x 'build.sh' \
 	-x 'config.php' 'admin/config.php' \

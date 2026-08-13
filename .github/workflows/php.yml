@@ -1,4 +1,4 @@
-name: PHP Composer
+name: Verifica
 
 on:
   push:
@@ -10,30 +10,84 @@ permissions:
   contents: read
 
 jobs:
-  build:
-
+  sintassi:
+    name: Sintassi PHP
     runs-on: ubuntu-latest
-
+    strategy:
+      fail-fast: false
+      matrix:
+        php: [ "8.1", "8.2", "8.3" ]
     steps:
-    - uses: actions/checkout@v4
+      - uses: actions/checkout@v4
 
-    - name: Validate composer.json and composer.lock
-      run: composer validate --strict
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: ${{ matrix.php }}
+          extensions: mysqli, gd, curl, openssl, zip, mbstring
+          coverage: none
 
-    - name: Cache Composer packages
-      id: composer-cache
-      uses: actions/cache@v3
-      with:
-        path: vendor
-        key: ${{ runner.os }}-php-${{ hashFiles('**/composer.lock') }}
-        restore-keys: |
-          ${{ runner.os }}-php-
+      - name: Controllo sintassi di tutti i file PHP
+        run: |
+          find admin catalog extension install system -name '*.php' \
+            -not -path 'system/storage/vendor/*' -print0 \
+            | xargs -0 -P 4 -n 1 php -l > /dev/null
 
-    - name: Install dependencies
-      run: composer install --prefer-dist --no-progress
+  installazione:
+    name: Installazione su MariaDB
+    runs-on: ubuntu-latest
+    services:
+      mariadb:
+        image: mariadb:11.4
+        env:
+          MARIADB_ROOT_PASSWORD: root
+          MARIADB_DATABASE: opencart
+        ports:
+          - 3306:3306
+        options: >-
+          --health-cmd="healthcheck.sh --connect --innodb_initialized"
+          --health-interval=5s
+          --health-timeout=5s
+          --health-retries=20
+    steps:
+      - uses: actions/checkout@v4
 
-    # Add a test script to composer.json, for instance: "test": "vendor/bin/phpunit"
-    # Docs: https://getcomposer.org/doc/articles/scripts.md
+      - uses: shivammathur/setup-php@v2
+        with:
+          php-version: "8.2"
+          extensions: mysqli, gd, curl, openssl, zip, mbstring
+          coverage: none
 
-    # - name: Run test suite
-    #   run: composer run-script test
+      - name: Prepara i file di configurazione
+        run: |
+          : > config.php
+          : > admin/config.php
+          chmod 666 config.php admin/config.php
+
+      - name: Installa OpenCart in italiano
+        run: |
+          php install/cli_install.php install \
+            --username    admin \
+            --password    admin123 \
+            --email       verifica@example.com \
+            --http_server http://localhost/ \
+            --language    it-it \
+            --db_driver   mysqli \
+            --db_hostname 127.0.0.1 \
+            --db_username root \
+            --db_password root \
+            --db_database opencart \
+            --db_port     3306 \
+            --db_prefix   oc_
+
+      - name: Controlla i dati italiani nel database
+        run: |
+          mysql -h 127.0.0.1 -uroot -proot opencart -e "
+            SELECT code, locale FROM oc_language;
+            SELECT name, rate, type FROM oc_tax_rate;
+            SELECT g.name, z.country_id FROM oc_geo_zone g
+              JOIN oc_zone_to_geo_zone z ON z.geo_zone_id = g.geo_zone_id;
+            SELECT \`key\`, value FROM oc_setting
+              WHERE \`key\` IN ('config_language_admin','config_currency','config_country_id','config_zone_id');
+            SELECT COUNT(*) AS paesi FROM oc_country;
+            SELECT COUNT(*) AS zone FROM oc_zone;
+          "
