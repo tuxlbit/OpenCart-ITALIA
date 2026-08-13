@@ -18,7 +18,7 @@ class Install extends \Opencart\System\Engine\Controller {
 		// URL
 		$this->registry->set('url', new \Opencart\System\Library\Url(HTTP_SERVER));
 
-		// Lingua: questa distribuzione e' solo in italiano, il parametro ?language= viene ignorato
+		// Language
 		$this->config->set('language_code', 'it-it');
 
 		$language = new \Opencart\System\Library\Language($this->config->get('language_code'));

@@ -27,3 +27,6 @@ Thumbs.db
 desktop.ini
 .DS_Store
 *.log
+
+# Archivio distribuibile prodotto da build.sh
+/dist/

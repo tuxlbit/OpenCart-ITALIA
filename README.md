@@ -1,30 +1,54 @@
 # OpenCart 4.1.0.3 — Edizione Italiana
 
-Distribuzione di OpenCart 4.1.0.3 completamente in italiano: pannello di amministrazione,
-vetrina, estensioni e procedura di installazione.
+[![OpenCart](https://img.shields.io/badge/OpenCart-4.1.0.3-1e88e5)](https://www.opencart.com/)
+[![PHP](https://img.shields.io/badge/PHP-8.1%2B-777bb4)](https://www.php.net/)
+[![Licenza](https://img.shields.io/badge/licenza-GPL--3.0-green)](LICENSE)
+[![Versione](https://img.shields.io/badge/versione-4.1.0.3-blue)](CHANGELOG.md)
+[![Lingua](https://img.shields.io/badge/lingua-italiano-red)](https://www.opencartitalia.it)
 
-Ricostruita a partire dal pacchetto `OpenCart_4.1.0.3_ITA.zip` correggendone i difetti
-(vedi *Correzioni applicate*).
+**OpenCart 4.1.0.3 completamente in italiano**: pannello di amministrazione, vetrina, estensioni di
+serie e procedura di installazione. Si scarica, si installa e si lavora in italiano dal primo
+minuto — senza pacchetti lingua da comprare, senza schermate in inglese e senza dover sistemare a
+mano paese, valuta e aliquota IVA.
 
-## Contenuto
+Sviluppato da **OpenCart ITALIA by SOLOSOLUZIONI** — [opencartitalia.it](https://www.opencartitalia.it)
+· [solosoluzioni.it](https://www.solosoluzioni.it)
 
-| Cartella | Descrizione |
-|---|---|
-| `admin/` | Pannello di amministrazione (lingue: `it-it`, `en-gb`) |
-| `catalog/` | Vetrina (lingue: `it-it`, `en-gb`) |
-| `extension/opencart/` | Estensioni di serie (lingue: `it-it`, `en-gb`) |
-| `install/` | Procedura di installazione, **solo in italiano** |
-| `system/` | Framework OpenCart |
+---
+
+## Caratteristiche
+
+- **Pannello di amministrazione in italiano** — 120 file di lingua, terminologia coerente in tutto
+  il pannello (Cruscotto, Progettazione, Rapporti, Giacenza…).
+- **Vetrina in italiano** — 86 file di lingua.
+- **Estensioni di serie tradotte** — 62 file lato amministrazione e 33 lato vetrina: metodi di
+  pagamento e spedizione, moduli, temi e rapporti parlano italiano come il resto del pannello.
+- **Installazione guidata interamente in italiano** — quattro passaggi, nessun selettore di lingua,
+  nessuna schermata inglese. Disponibile anche da riga di comando.
+- **Impostazioni predefinite per l'Italia** — paese Italia, zona Roma, **euro come valuta base**,
+  aliquota unica **IVA 22%**, geo zone già puntate sull'Italia.
+- **Dati geografici corretti** — 253 paesi e 4.066 zone con la grafia ufficiale, comprese le
+  110 province italiane.
+- **Inglese incluso come riserva** — la lingua `en-gb` è presente e si attiva quando serve da
+  *Sistema → Localizzazione → Lingue*.
+
+## Requisiti
+
+- PHP **8.1+** con le estensioni `mysqli`, `gd`, `curl`, `openssl`, `zlib`, `zip`, `mbstring`
+- MySQL 5.7+ oppure MariaDB 10.3+
+- Apache o Nginx
 
 ## Installazione
 
 ### Da browser
 
-1. Copiare tutti i file sul server web.
-2. Creare due file vuoti `config.php` e `admin/config.php` e renderli scrivibili
-   (non sono nel repository perché contengono la configurazione del singolo negozio).
-3. Aprire `http://tuodominio/install/` e seguire i quattro passaggi.
-4. A installazione conclusa rinominare o eliminare la cartella `install/`.
+1. Scarica l'archivio dalla [pagina delle release](https://github.com/tuxlbit/OpenCart-ITALIA/releases)
+   e copia i file sul server web.
+2. Verifica che `config.php` e `admin/config.php` siano presenti, vuoti e scrivibili
+   (se hai clonato il repository, creali tu: contengono la configurazione del singolo negozio e
+   non sono versionati).
+3. Apri `http://tuodominio/install/` e segui i quattro passaggi.
+4. A installazione conclusa rinomina o elimina la cartella `install/`.
 
 ### Da riga di comando
 
@@ -44,60 +68,41 @@ php install/cli_install.php install \
     --db_prefix   oc_
 ```
 
-## Correzioni applicate rispetto al pacchetto originale
+## Struttura
 
-### 1. File di lingua
+| Cartella | Descrizione |
+|---|---|
+| `admin/` | Pannello di amministrazione (lingue `it-it`, `en-gb`) |
+| `catalog/` | Vetrina (lingue `it-it`, `en-gb`) |
+| `extension/opencart/` | Estensioni di serie (lingue `it-it`, `en-gb`) |
+| `install/` | Procedura di installazione, solo in italiano |
+| `system/` | Framework OpenCart |
+| `dist/` | Archivio distribuibile prodotto da `build.sh` (non versionato) |
 
-I file `it-it` sono stati sostituiti integralmente con quelli dell'installazione di
-riferimento (progetto `OpenCart_Claude`), con traduzioni coerenti e tutti i file
-verificati con `php -l`.
+## Dopo l'installazione
 
-- `admin/language/it-it` — 120 file
-- `catalog/language/it-it` — 86 file
-- `extension/opencart/admin/language/it-it` — 62 file (**assenti nel pacchetto originale**)
-- `extension/opencart/catalog/language/it-it` — 33 file (**assenti nel pacchetto originale**)
+Il negozio parte con nome *Your Store* e dati di contatto di esempio: la prima cosa da fare è
+aprire *Sistema → Impostazioni*, modificare il negozio e compilare nome, indirizzo, contatti e
+**Meta tag Titolo** nella scheda *Negozio*. Da lì si controllano anche valuta, unità di misura
+e opzioni fiscali.
 
-Aggiunta anche la lingua `en-gb` come riserva per pannello, vetrina ed estensioni
-(non registrata nel database: la si può attivare da *Sistema > Localizzazione > Lingue*).
-Rimossa la lingua `fr-fr` dalle estensioni.
+## Creare l'archivio distribuibile
 
-### 2. Procedura di installazione solo in italiano
+```bash
+./build.sh
+```
 
-- `system/config/install.php`: lingua predefinita `it-it` (era `en-gb`, ma i file
-  `en-gb` dell'installer non erano nemmeno presenti nel pacchetto).
-- `install/controller/startup/install.php`: il parametro `?language=` viene ignorato,
-  la lingua è forzata a `it-it`.
-- `install/controller/common/header.php` e `install/view/template/common/header.twig`:
-  rimosso il menu a tendina di selezione della lingua; `<html lang="it">`.
-- Rimosso `install/opencart-en-gb.sql`: resta solo il dump italiano.
-- Tradotta la stringa `text_step_1`, rimasta in inglese.
+Produce `dist/OpenCart_4.1.0.3_IT.zip`, l'archivio allegato alla release: tutti i file tranne
+`.git/`, `dist/` e la configurazione del singolo negozio, con `config.php` e `admin/config.php`
+inclusi vuoti e pronti da compilare.
 
-### 3. Zone geografiche e fiscalità (`install/opencart-it-it.sql`)
+## Assistenza
 
-- **Nomi delle zone** — nel pacchetto originale i nomi di tutte le zone del mondo erano
-  stati tradotti automaticamente, con esiti errati (`Puke` → *Vomito*, `Peqin` → *Pechino*,
-  `Encamp` → *Accamparsi*, `Mat` → *Stuoia*…). Le tabelle `country`, `zone` e
-  `zone_description` sono state ripristinate identiche al dump ufficiale OpenCart:
-  i nomi propri restano nella grafia originale e le 110 province italiane sono corrette.
-- **Geo zone** — erano state rinominate *Zona IVA Italia* / *Spedizione in Italia* ma
-  contenevano ancora le contee del Regno Unito (`country_id` 222). Ora entrambe puntano
-  all'Italia (`country_id` 105, tutte le zone).
-- **IVA** — l'aliquota era quella britannica (20%) ed era presente una tassa ecologica
-  inesistente in Italia. Ora c'è una sola aliquota `IVA (22%)` sulla zona Italia.
-- **Valute** — l'euro aveva un tasso di 0,7846 pur essendo la valuta predefinita del
-  negozio. Ora `EUR = 1,00000000` e le altre valute sono ricalcolate su base euro.
-- **Escape SQL** — gli apostrofi con backslash (`\'`) sono stati convertiti in apostrofi
-  doppi (`''`), compatibili anche con la modalità `NO_BACKSLASH_ESCAPES`.
+Domande, segnalazioni e richieste di personalizzazione: [opencartitalia.it](https://www.opencartitalia.it).
+Per bug e proposte relative a questa distribuzione usa le
+[issue del repository](https://github.com/tuxlbit/OpenCart-ITALIA/issues).
 
-## Verifiche eseguite
+## Licenza
 
-- `php -l` su tutti i file PHP modificati.
-- Installazione completa via `cli_install.php` su MariaDB 10.11: esito positivo.
-- Controllo sul database installato: lingua `it-it`, valuta `EUR`, paese `Italia` (105),
-  zona `Roma` (3924), geo zone sull'Italia, aliquota IVA 22%, 4.066 zone e 253 paesi.
-- Installer web aperto da browser: interfaccia in italiano, nessun selettore di lingua.
-
-## Credenziali e impostazioni predefinite del negozio
-
-Il negozio viene creato con paese Italia, zona Roma, valuta euro e lingua italiana;
-nome del negozio e dati di contatto vanno personalizzati in *Sistema > Impostazioni*.
+[GPL-3.0](LICENSE), come OpenCart. OpenCart è un marchio di OpenCart Ltd.; questa è una
+ridistribuzione localizzata in italiano, non un prodotto ufficiale OpenCart Ltd.
