@@ -1,0 +1,136 @@
+<?php
+// Heading
+$_['heading_title']              = 'Ordini';
+
+// Text
+$_['text_success']               = 'Operazione riuscita: hai modificato gli ordini!';
+$_['text_list']                  = 'Elenco ordini';
+$_['text_add']                   = 'Aggiungi ordine';
+$_['text_edit']                  = 'Ordine (n. %s)';
+$_['text_filter']                = 'Filtra';
+$_['text_store']                 = 'Negozio';
+$_['text_date_added']            = 'Data inserimento';
+$_['text_customer']              = 'Cliente';
+$_['text_product_add']           = 'Aggiungi prodotto';
+$_['text_model'] 			     = 'Modello';
+$_['text_reward']                = 'Punti premio';
+$_['text_points']                = 'Punti';
+$_['text_reward_add']            = 'Operazione riuscita: punti premio aggiunti!';
+$_['text_reward_remove']         = 'Operazione riuscita: punti premio rimossi!';
+$_['text_affiliate']             = 'Affiliati';
+$_['text_commission']            = 'Commissione';
+$_['text_commission_add']        = 'Operazione riuscita: commissione aggiunta!';
+$_['text_commission_remove']     = 'Operazione riuscita: commissione rimossa!';
+$_['text_upload']                = 'Il file è stato caricato correttamente!';
+$_['text_subscription']          = 'Abbonamento';
+$_['text_subscription_trial']    = '%s ogni %d %s per %d pagamenti, poi';
+$_['text_subscription_duration'] = '%s ogni %d %s per %d pagamenti';
+$_['text_subscription_cancel']   = '%s ogni %d %s fino alla disdetta';
+$_['text_day']                   = 'giorno';
+$_['text_week']                  = 'settimana';
+$_['text_semi_month']            = 'quindicina';
+$_['text_month']                 = 'mese';
+$_['text_year']                  = 'anno';
+$_['text_more']                  = 'Altro..';
+$_['text_less']                  = 'Meno..';
+$_['text_payment_address']       = 'Indirizzo di fatturazione';
+$_['text_payment_method']        = 'Metodo di pagamento';
+$_['text_payment']               = 'Seleziona il metodo di pagamento da usare per questo ordine.';
+$_['text_shipping_address']      = 'Indirizzo di spedizione';
+$_['text_shipping_method']       = 'Metodo di spedizione';
+$_['text_shipping']              = 'Seleziona il metodo di spedizione da usare per questo ordine.';
+$_['text_comment']               = 'Commento';
+$_['text_history']               = 'Cronologia';
+$_['text_history_add']           = 'Aggiungi voce alla cronologia';
+$_['text_browser']               = 'Browser';
+$_['text_ip']                    = 'Indirizzo IP';
+$_['text_forwarded_ip']          = 'IP inoltrato';
+$_['text_user_agent']            = 'Browser utilizzato';
+$_['text_accept_language']       = 'Lingua accettata';
+$_['text_order_id']              = 'Numero ordine';
+$_['text_website']               = 'Sito web';
+$_['text_invoice']               = 'Fattura';
+$_['text_invoice_no']            = 'N. fattura';
+$_['text_tbc']                   = 'Da assegnare';
+$_['text_store_address']         = 'Indirizzo del negozio';
+$_['text_store_telephone']       = 'Telefono del negozio';
+$_['text_store_email']           = 'Email del negozio';
+$_['text_customer_email']        = 'Email del cliente';
+$_['text_customer_telephone']    = 'Telefono del cliente';
+$_['text_missing']               = 'Ordini mancanti';
+$_['text_default']               = 'Predefinito';
+$_['text_picklist']              = 'Bolla di accompagnamento';
+$_['text_sku']                   = 'SKU';
+$_['text_upc']                   = 'UPC';
+$_['text_ean']                   = 'EAN';
+$_['text_jan']                   = 'JAN';
+$_['text_isbn']                  = 'ISBN';
+$_['text_mpn']                   = 'MPN';
+
+// Column
+$_['column_order_id']            = 'Numero ordine';
+$_['column_customer']            = 'Cliente';
+$_['column_store']               = 'Negozio';
+$_['column_status']              = 'Stato';
+$_['column_date_added']          = 'Data inserimento';
+$_['column_date_modified']       = 'Data modifica';
+$_['column_total']               = 'Totale';
+$_['column_product']             = 'Prodotto';
+$_['column_model']               = 'Modello';
+$_['column_quantity']            = 'Quantità';
+$_['column_price']               = 'Prezzo unitario';
+$_['column_comment']             = 'Commento';
+$_['column_notify']              = 'Cliente avvisato';
+$_['column_location']            = 'Ubicazione';
+$_['column_reference']           = 'Riferimento';
+$_['column_weight']              = 'Peso del prodotto';
+$_['column_action']              = 'Azione';
+
+// Entry
+$_['entry_store']                = 'Negozio';
+$_['entry_customer']             = 'Cliente';
+$_['entry_customer_group']       = 'Gruppo clienti';
+$_['entry_firstname']            = 'Nome';
+$_['entry_lastname']             = 'Cognome';
+$_['entry_email']                = 'Email';
+$_['entry_telephone']            = 'Telefono';
+$_['entry_address']              = 'Scegli l\'indirizzo';
+$_['entry_company']              = 'Azienda';
+$_['entry_address_1']            = 'Indirizzo 1';
+$_['entry_address_2']            = 'Indirizzo 2';
+$_['entry_city']                 = 'Città';
+$_['entry_postcode']             = 'CAP';
+$_['entry_country']              = 'Nazione';
+$_['entry_zone']                 = 'Regione / Provincia';
+$_['entry_product']              = 'Scegli il prodotto';
+$_['entry_option']               = 'Scegli le opzioni';
+$_['entry_subscription']         = 'Scegli l\'abbonamento';
+$_['entry_quantity']             = 'Quantità';
+$_['entry_order_status']         = 'Stato ordine';
+$_['entry_notify']               = 'Avvisa il cliente';
+$_['entry_shipping_method']      = 'Metodo di spedizione';
+$_['entry_payment_method']       = 'Metodo di pagamento';
+$_['entry_override']             = 'Forza';
+$_['entry_comment']              = 'Commento';
+$_['entry_language']             = 'Lingua';
+$_['entry_currency']             = 'Valuta';
+$_['entry_affiliate']            = 'Affiliati';
+$_['entry_order_id']             = 'Numero ordine';
+$_['entry_total']                = 'Totale';
+$_['entry_date_from']            = 'Data da';
+$_['entry_date_to']              = 'Data a';
+$_['entry_date_modified_from']   = 'Data modifica da';
+$_['entry_date_modified_to']     = 'Data modifica a';
+
+// Help
+$_['help_override']              = 'Se un\'estensione anti-frode impedisce di cambiare lo stato dell\'ordine del cliente, attiva questa opzione per forzare il cambio.';
+
+// Error
+$_['error_warning']              = 'Attenzione: controlla attentamente il modulo, contiene errori!';
+$_['error_permission']           = 'Attenzione: non hai i permessi per modificare gli ordini!';
+$_['error_invoice_no']           = 'Attenzione: il numero di fattura è già stato creato!';
+$_['error_order']                = 'Attenzione: l\'ordine non esiste!';
+$_['error_affiliate']            = 'Attenzione: l\'affiliato non esiste!';
+$_['error_reward_add']           = 'Attenzione: i punti premio per questo ordine sono già stati aggiunti!';
+$_['error_reward_guest']         = 'Attenzione: gli ospiti non possono usare i punti premio!';
+$_['error_commission_add']       = 'Attenzione: la commissione affiliato per questo ordine è già stata aggiunta!';

@@ -1,0 +1,29 @@
+# Configurazione generata dall'installer
+/config.php
+/admin/config.php
+
+# Storage runtime
+/system/storage/cache/*
+!/system/storage/cache/index.html
+/system/storage/logs/*
+!/system/storage/logs/index.html
+/system/storage/session/*
+!/system/storage/session/index.html
+/system/storage/download/*
+!/system/storage/download/index.html
+/system/storage/upload/*
+!/system/storage/upload/index.html
+/system/storage/backup/*
+!/system/storage/backup/index.html
+/system/storage/marketplace/*
+
+# Immagini caricate e cache miniature
+/image/cache/*
+/image/catalog/*
+!/image/catalog/demo/
+
+# Sistema
+Thumbs.db
+desktop.ini
+.DS_Store
+*.log

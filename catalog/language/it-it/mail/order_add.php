@@ -1,0 +1,35 @@
+<?php
+// Text
+$_['text_subject']               = '%s - Ordine %s';
+$_['text_greeting']              = 'Grazie per il tuo interesse verso i prodotti %s. Il tuo ordine è stato ricevuto e sarà elaborato non appena il pagamento sarà confermato.';
+$_['text_link']                  = 'Per vedere il tuo ordine fai clic sul link qui sotto:';
+$_['text_order_detail']          = 'Dettagli dell\'ordine';
+$_['text_instruction']           = 'Istruzioni';
+$_['text_order_id']              = 'Numero ordine:';
+$_['text_date_added']            = 'Data inserimento:';
+$_['text_order_status']          = 'Stato ordine:';
+$_['text_payment_method']        = 'Metodo di pagamento:';
+$_['text_shipping_method']       = 'Metodo di spedizione:';
+$_['text_email']                 = 'Email:';
+$_['text_telephone']             = 'Telefono:';
+$_['text_ip']                    = 'Indirizzo IP:';
+$_['text_payment_address']       = 'Indirizzo di fatturazione';
+$_['text_shipping_address']      = 'Indirizzo di spedizione';
+$_['text_products']              = 'Prodotti';
+$_['text_product']               = 'Prodotto';
+$_['text_model']                 = 'Modello';
+$_['text_quantity']              = 'Quantità';
+$_['text_price']                 = 'Prezzo';
+$_['text_order_total']           = 'Totali dell\'ordine';
+$_['text_total']                 = 'Totale';
+$_['text_subscription']          = 'Abbonamento';
+$_['text_subscription_duration'] = '%s ogni %d %s per %d pagamenti';
+$_['text_subscription_cancel']   = '%s ogni %d %s fino alla disdetta';
+$_['text_day']                   = 'giorno';
+$_['text_week']                  = 'settimana';
+$_['text_semi_month']            = 'quindicina';
+$_['text_month']                 = 'mese';
+$_['text_year']                  = 'anno';
+$_['text_download']              = 'Una volta confermato il pagamento puoi fare clic sul link qui sotto per accedere ai tuoi prodotti scaricabili:';
+$_['text_comment']               = 'I commenti relativi al tuo ordine sono:';
+$_['text_footer']                = 'Se hai domande rispondi pure a questa email.';

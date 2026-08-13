@@ -1,0 +1,33 @@
+<?php
+// Text
+$_['text_subject']               = '%s - Abbonamento %s';
+$_['text_greeting']              = 'Grazie per il tuo interesse verso i prodotti %s. La tua richiesta di abbonamento è stata ricevuta e sarà elaborata non appena il pagamento sarà confermato.';
+$_['text_link']                  = 'Per vedere il tuo abbonamento fai clic sul link qui sotto:';
+$_['text_promotion']             = 'Operazione riuscita: con questo abbonamento è stata attivata anche una promozione!';
+$_['text_subscription_duration'] = '%s ogni %d %s per %d pagamenti';
+$_['text_subscription_cancel']   = '%s ogni %d %s fino alla disdetta';
+$_['text_subscription_detail']   = 'Dettagli dell\'abbonamento';
+$_['text_instruction']           = 'Istruzioni';
+$_['text_orders_id']             = 'Numero ordine:';
+$_['text_date_added']            = 'Data inserimento:';
+$_['text_order_status']          = 'Stato ordine:';
+$_['text_payment_method']        = 'Metodo di pagamento:';
+$_['text_payment_address']       = 'Indirizzo di fatturazione';
+$_['text_email']                 = 'Email:';
+$_['text_telephone']             = 'Telefono:';
+$_['text_ip']                    = 'Indirizzo IP:';
+$_['text_products']              = 'Prodotti';
+$_['text_product']               = 'Prodotto';
+$_['text_model']                 = 'Modello';
+$_['text_quantity']              = 'Quantità';
+$_['text_price']                 = 'Prezzo';
+$_['text_order_total']           = 'Totali dell\'ordine';
+$_['text_total']                 = 'Totale';
+$_['text_comment']               = 'I commenti relativi al tuo abbonamento sono:';
+$_['text_description']           = 'Descrizione';
+$_['text_day']                   = 'giorno';
+$_['text_week']                  = 'settimana';
+$_['text_semi_month']            = 'quindicina';
+$_['text_month']                 = 'mese';
+$_['text_year']                  = 'anno';
+$_['text_footer']                = 'Se hai domande rispondi pure a questa email.';
