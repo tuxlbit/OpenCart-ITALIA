@@ -1,0 +1,104 @@
+#!/bin/bash
+set -e
+
+echo "--- OpenCart ITALIA: avvio ---"
+
+APP_USER="${PHP_UNAME:-www-data}"
+
+cd /var/www
+
+CONFIG_FILE="config.php"
+ADMIN_CONFIG_FILE="admin/config.php"
+
+# ----------------------------------------------------------------------
+# 1. Allinea i file di configurazione alle variabili d'ambiente
+# ----------------------------------------------------------------------
+update_config_if_changed() {
+	local file=$1
+	local key=$2
+	local env_value=$3
+
+	if [ ! -f "$file" ] || [ ! -s "$file" ]; then
+		return
+	fi
+
+	local current_value
+	current_value=$(grep "define('$key'" "$file" | sed -n "s/.*define('$key',[ ]*'\([^']*\)').*$/\1/p")
+
+	if [ "$current_value" != "$env_value" ]; then
+		sed -i "s/define('$key',[ ]*'[^']*')/define('$key', '$env_value')/g" "$file"
+		echo "--- $file: $key aggiornato in $env_value ---"
+	fi
+}
+
+for file in "$CONFIG_FILE" "$ADMIN_CONFIG_FILE"; do
+	if [ -f "$file" ] && [ -s "$file" ]; then
+		update_config_if_changed "$file" "DB_DRIVER"   "${DB_DRIVER:-mysqli}"
+		update_config_if_changed "$file" "DB_HOSTNAME" "${DB_HOSTNAME:-mysql}"
+		update_config_if_changed "$file" "DB_USERNAME" "${DB_USERNAME:-opencart}"
+		update_config_if_changed "$file" "DB_PASSWORD" "${DB_PASSWORD:-opencart}"
+		update_config_if_changed "$file" "DB_DATABASE" "${DB_DATABASE:-opencart}"
+		update_config_if_changed "$file" "DB_PORT"     "${DB_PORT:-3306}"
+	fi
+done
+
+# ----------------------------------------------------------------------
+# 2. Installazione al primo avvio
+# ----------------------------------------------------------------------
+[ -f "$CONFIG_FILE" ] || : > "$CONFIG_FILE"
+[ -f "$ADMIN_CONFIG_FILE" ] || : > "$ADMIN_CONFIG_FILE"
+chmod 664 "$CONFIG_FILE" "$ADMIN_CONFIG_FILE"
+
+if [ "${AUTO_INSTALL:-1}" = "1" ] && [ ! -f "install.lock" ] && [ -f "install/cli_install.php" ]; then
+	echo "--- Installazione di OpenCart in ${OPENCART_LANGUAGE:-it-it} ---"
+
+	php install/cli_install.php install \
+		--username    "${OPENCART_USERNAME:-admin}" \
+		--password    "${OPENCART_PASSWORD:-admin123}" \
+		--email       "${OPENCART_ADMIN_EMAIL:-admin@example.com}" \
+		--http_server "${OPENCART_HTTP_SERVER:-http://localhost:8080/}" \
+		--language    "${OPENCART_LANGUAGE:-it-it}" \
+		--db_driver   "${DB_DRIVER:-mysqli}" \
+		--db_hostname "${DB_HOSTNAME:-mysql}" \
+		--db_username "${DB_USERNAME:-opencart}" \
+		--db_password "${DB_PASSWORD:-opencart}" \
+		--db_database "${DB_DATABASE:-opencart}" \
+		--db_port     "${DB_PORT:-3306}" \
+		--db_prefix   "${DB_PREFIX:-oc_}" \
+		&& touch "install.lock" \
+		&& echo "--- Installazione completata: negozio ${OPENCART_HTTP_SERVER:-http://localhost:8080/} - pannello ${OPENCART_HTTP_SERVER:-http://localhost:8080/}admin/ ---" \
+		|| echo "--- Installazione non riuscita: controlla i log ---"
+elif [ ! -f "install.lock" ]; then
+	echo "--- AUTO_INSTALL disattivato: apri ${OPENCART_HTTP_SERVER:-http://localhost:8080/}install/ per installare a mano ---"
+fi
+
+# ----------------------------------------------------------------------
+# 3. File del server web
+# ----------------------------------------------------------------------
+if [ -f ".htaccess.txt" ] && [ ! -f ".htaccess" ]; then
+	cp ".htaccess.txt" ".htaccess"
+	echo "--- Creato .htaccess da .htaccess.txt ---"
+fi
+
+# ----------------------------------------------------------------------
+# 4. Permessi
+# ----------------------------------------------------------------------
+chown -R "$APP_USER":www-data /var/www 2>/dev/null || true
+chmod -R g+w /var/www/system/storage /var/www/image 2>/dev/null || true
+
+# ----------------------------------------------------------------------
+# 5. Operazioni pianificate
+# ----------------------------------------------------------------------
+if [ -f "/var/www/docker/php/cron/crontab" ]; then
+	cp /var/www/docker/php/cron/crontab /etc/cron.d/opencart
+	chmod 0644 /etc/cron.d/opencart
+	touch /var/log/cron.log
+	chown www-data:www-data /var/log/cron.log
+fi
+
+# ----------------------------------------------------------------------
+# 6. Avvio dei servizi
+# ----------------------------------------------------------------------
+mkdir -p /var/run/supervisor /var/log/supervisor
+
+exec "$@"

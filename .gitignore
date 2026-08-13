@@ -25,3 +25,8 @@
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Configurazione locale dell'ambiente Docker e file generati all'avvio
+/docker/.env.docker
+/install.lock
+/.htaccess

@@ -68,6 +68,35 @@ php install/cli_install.php install \
     --db_prefix   oc_
 ```
 
+## Provalo con Docker
+
+Nel repository c'e' un ambiente Docker pronto: Apache, PHP-FPM e MariaDB in contenitori
+separati, con l'installazione italiana gia' fatta al primo avvio.
+
+```bash
+make init     # prepara docker/.env.docker
+make build    # costruisce le immagini
+make up       # avvia i servizi
+```
+
+Negozio su `http://localhost:8080/`, pannello su `http://localhost:8080/admin/`,
+credenziali predefinite `admin` / `admin123` (si cambiano in `docker/.env.docker` prima
+del primo avvio). Servono Docker, Docker Compose e `make`; su Windows conviene usare WSL 2.
+
+| Comando | Cosa fa |
+|---|---|
+| `make up` | Avvia i servizi |
+| `make down` | Ferma i contenitori (`options="-v"` cancella anche il database) |
+| `make logs options="php"` | Segue i log di un servizio |
+| `make php` | Apre una shell nel contenitore PHP |
+| `make mysql` | Apre una shell nel contenitore MariaDB |
+| `make up profiles="adminer"` | Avvia anche Adminer su `http://localhost:8081/` |
+| `make help` | Elenco completo dei comandi |
+
+Sono disponibili come servizi facoltativi anche `redis` e `memcached`. Per vedere la
+procedura di installazione italiana invece di saltarla, imposta `AUTO_INSTALL=0` in
+`docker/.env.docker` e apri `http://localhost:8080/install/`.
+
 ## Struttura
 
 | Cartella | Descrizione |
@@ -77,6 +106,7 @@ php install/cli_install.php install \
 | `extension/opencart/` | Estensioni di serie (lingue `it-it`, `en-gb`) |
 | `install/` | Procedura di installazione, solo in italiano |
 | `system/` | Framework OpenCart |
+| `docker/` | Ambiente Docker: immagini Apache e PHP, configurazioni, avvio |
 | `dist/` | Archivio distribuibile prodotto da `build.sh` (non versionato) |
 
 ## Dopo l'installazione

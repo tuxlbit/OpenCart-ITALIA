@@ -15,6 +15,7 @@ cd "$ROOT"
 zip -r -q "$OUT" . \
 	-x '.git/*' \
 	-x '.github/*' \
+	-x 'docker/*' 'docker-compose.yml' 'Makefile' '.dockerignore' \
 	-x 'dist/*' \
 	-x 'build.sh' \
 	-x 'config.php' 'admin/config.php' \

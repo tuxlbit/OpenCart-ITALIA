@@ -29,6 +29,15 @@ Prima versione pubblica di **OpenCart ITALIA**, l'edizione italiana di OpenCart 
 - 253 paesi e 4.066 zone con la grafia ufficiale, comprese le 110 province italiane.
 - Dump SQL compatibile anche con la modalità MySQL `NO_BACKSLASH_ESCAPES`.
 
+### Ambiente Docker
+
+- Ambiente Docker incluso nel repository: Apache, PHP-FPM e MariaDB in contenitori separati,
+  con `Makefile` (`make init`, `build`, `up`, `down`, `logs`, `php`, `mysql`).
+- Installazione italiana automatica al primo avvio, disattivabile con `AUTO_INSTALL=0` per
+  vedere la procedura guidata.
+- Servizi facoltativi Adminer, Redis e Memcached, avviabili con `make up profiles="..."`.
+- Impostazioni raccolte in `docker/.env.docker`, creato da `make init`.
+
 ### Marchio
 
 - Piè di pagina del pannello: *OpenCart ITALIA by SOLOSOLUZIONI*, con i collegamenti a

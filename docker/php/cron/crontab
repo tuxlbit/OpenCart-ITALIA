@@ -1,0 +1,16 @@
+# Operazioni pianificate di OpenCart ITALIA
+#
+# .---------------- minuto (0 - 59)
+# |  .------------- ora (0 - 23)
+# |  |  .---------- giorno del mese (1 - 31)
+# |  |  |  .------- mese (1 - 12)
+# |  |  |  |  .---- giorno della settimana (0 - 6, domenica = 0)
+# |  |  |  |  |
+# *  *  *  *  * utente comando
+#
+# Per attivare le operazioni pianificate del negozio, togli il commento alla riga
+# seguente: usa il nome del servizio "apache" al posto di localhost, perche' la
+# richiesta parte da un altro contenitore.
+# * * * * * www-data curl -s -H 'Host: localhost' 'http://apache/index.php?route=common/cron' >> /var/log/cron.log 2>&1
+
+# Il file deve terminare con una riga vuota
