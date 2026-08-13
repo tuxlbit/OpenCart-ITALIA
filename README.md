@@ -69,8 +69,8 @@ php install/cli_install.php install \
 
 ## Provalo con Docker
 
-Nel repository c'e' un ambiente Docker pronto: Apache, PHP-FPM e MariaDB in contenitori
-separati, con l'installazione italiana gia' fatta al primo avvio.
+Nel repository c'è un ambiente Docker pronto: Apache, PHP-FPM e MariaDB in contenitori
+separati, con l'installazione italiana già fatta al primo avvio.
 
 ```bash
 make init     # prepara docker/.env.docker
@@ -96,27 +96,6 @@ Sono disponibili come servizi facoltativi anche `redis` e `memcached`. Per veder
 procedura di installazione italiana invece di saltarla, imposta `AUTO_INSTALL=0` in
 `docker/.env.docker` e apri `http://localhost:8080/install/`.
 
-### Se il contenitore PHP non parte
-
-Su Windows, un Git configurato per convertire le terminazioni di riga puo' trasformare in CRLF
-lo script di avvio, e il contenitore si ferma con
-`exec /usr/local/bin/docker-opencart-entrypoint: no such file or directory`.
-Il `.gitattributes` del repository impone LF a tutti i file di testo e l'immagine PHP li
-normalizza comunque in fase di costruzione, quindi il problema non dovrebbe presentarsi.
-Se hai clonato prima di questa versione, rinfresca la copia di lavoro e ricostruisci:
-
-```bash
-git rm --cached -r . -q
-git reset --hard
-make build options="--no-cache"
-make up options="--force-recreate"
-```
-
-> I due `config.php` sono versionati vuoti perche' servono all'installazione. Se lavori sul
-> repository dopo aver installato un negozio, con
-> `git update-index --skip-worktree config.php admin/config.php` eviti che i dati del tuo
-> database finiscano in un commit.
-
 ## Struttura
 
 | Cartella | Descrizione |
@@ -127,7 +106,6 @@ make up options="--force-recreate"
 | `install/` | Procedura di installazione, solo in italiano |
 | `system/` | Framework OpenCart |
 | `docker/` | Ambiente Docker: immagini Apache e PHP, configurazioni, avvio |
-| `dist/` | Archivio distribuibile prodotto da `build.sh` (non versionato) |
 
 ## Dopo l'installazione
 
@@ -135,16 +113,6 @@ Il negozio parte con nome *Your Store* e dati di contatto di esempio: la prima c
 aprire *Sistema → Impostazioni*, modificare il negozio e compilare nome, indirizzo, contatti e
 **Meta tag Titolo** nella scheda *Negozio*. Da lì si controllano anche valuta, unità di misura
 e opzioni fiscali.
-
-## Creare l'archivio distribuibile
-
-```bash
-./build.sh
-```
-
-Produce `dist/OpenCart_4.1.0.3_IT.zip`, l'archivio allegato alla release: tutti i file tranne
-`.git/`, `dist/` e la configurazione del singolo negozio, con `config.php` e `admin/config.php`
-inclusi vuoti e pronti da compilare.
 
 ## Assistenza
 
