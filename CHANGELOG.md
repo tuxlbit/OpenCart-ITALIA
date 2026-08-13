@@ -29,6 +29,16 @@ Prima versione pubblica di **OpenCart ITALIA**, l'edizione italiana di OpenCart 
 - 253 paesi e 4.066 zone con la grafia ufficiale, comprese le 110 province italiane.
 - Dump SQL compatibile anche con la modalità MySQL `NO_BACKSLASH_ESCAPES`.
 
+### Marchio
+
+- Piè di pagina del pannello: *OpenCart ITALIA by SOLOSOLUZIONI*, con i collegamenti a
+  opencartitalia.it e solosoluzioni.it.
+- Menu *Guida* del pannello: Sito, Documentazione e Assistenza rimandano a opencartitalia.it.
+- Titolo del pannello e piè di pagina della vetrina (*Realizzato con OpenCart ITALIA*) allineati
+  al marchio, sia in italiano sia in inglese.
+- I collegamenti funzionali al marketplace OpenCart restano invariati: servono a ottenere la
+  chiave API e a installare le estensioni.
+
 ### Qualità
 
 - Tutti i file PHP verificati con `php -l`.

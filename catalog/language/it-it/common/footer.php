@@ -15,4 +15,4 @@ $_['text_account']      = 'Il mio account';
 $_['text_order']        = 'Storico ordini';
 $_['text_wishlist']     = 'Lista desideri';
 $_['text_newsletter']   = 'Newsletter';
-$_['text_powered']      = 'Realizzato con <a href="https://www.opencart.com">OpenCart</a><br/> %s &copy; %s';
+$_['text_powered']      = 'Realizzato con <a href="https://www.opencartitalia.it" target="_blank">OpenCart ITALIA</a><br/> %s &copy; %s';
