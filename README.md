@@ -44,9 +44,8 @@ Sviluppato da **OpenCart ITALIA by SOLOSOLUZIONI** — [opencartitalia.it](https
 
 1. Scarica l'archivio dalla [pagina delle release](https://github.com/tuxlbit/OpenCart-ITALIA/releases)
    e copia i file sul server web.
-2. Verifica che `config.php` e `admin/config.php` siano presenti, vuoti e scrivibili
-   (se hai clonato il repository, creali tu: contengono la configurazione del singolo negozio e
-   non sono versionati).
+2. Verifica che `config.php` e `admin/config.php` siano scrivibili: sono inclusi vuoti e la
+   procedura di installazione li compila.
 3. Apri `http://tuodominio/install/` e segui i quattro passaggi.
 4. A installazione conclusa rinomina o elimina la cartella `install/`.
 
@@ -112,6 +111,11 @@ git reset --hard
 make build options="--no-cache"
 make up options="--force-recreate"
 ```
+
+> I due `config.php` sono versionati vuoti perche' servono all'installazione. Se lavori sul
+> repository dopo aver installato un negozio, con
+> `git update-index --skip-worktree config.php admin/config.php` eviti che i dati del tuo
+> database finiscano in un commit.
 
 ## Struttura
 

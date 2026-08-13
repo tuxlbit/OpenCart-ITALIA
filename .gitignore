@@ -1,7 +1,3 @@
-# Configurazione del singolo negozio (creata dalla procedura di installazione)
-/config.php
-/admin/config.php
-
 # Contenuti generati durante l'uso: le cartelle restano, con il loro index.html
 /system/storage/cache/*
 !/system/storage/cache/index.html

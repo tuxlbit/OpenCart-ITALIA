@@ -61,3 +61,5 @@ Prima versione pubblica di **OpenCart ITALIA**, l'edizione italiana di OpenCart 
 
 - `README.md`, `CHANGELOG.md`, `build.sh` per l'archivio distribuibile, `.gitignore` e
   `.gitattributes`.
+- `config.php` e `admin/config.php` inclusi vuoti: servono alla procedura di installazione,
+  che li compila al primo avvio.
