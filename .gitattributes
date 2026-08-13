@@ -1,16 +1,40 @@
-* text=auto
-*.php text eol=lf
-*.twig text eol=lf
-*.sql text eol=lf
-*.js text eol=lf
-*.css text eol=lf
-*.json text eol=lf
-*.md text eol=lf
-*.png binary
-*.jpg binary
-*.gif binary
-*.ico binary
+# I file di testo sono LF nel repository e restano LF anche quando vengono estratti
+# su Windows: script, configurazioni e file dell'ambiente Docker finiscono dentro
+# contenitori Linux, e con terminazioni CRLF non verrebbero eseguiti.
+* text=auto eol=lf
+
+# File che devono essere LF senza eccezioni
+*.sh                                  text eol=lf
+*.php                                 text eol=lf
+*.twig                                text eol=lf
+*.sql                                 text eol=lf
+*.js                                  text eol=lf
+*.css                                 text eol=lf
+*.json                                text eol=lf
+*.md                                  text eol=lf
+*.yml                                 text eol=lf
+*.yaml                                text eol=lf
+*.conf                                text eol=lf
+*.ini                                 text eol=lf
+Makefile                              text eol=lf
+Dockerfile                            text eol=lf
+docker/**                             text eol=lf
+docker/php/docker-opencart-entrypoint text eol=lf
+.htaccess                             text eol=lf
+.htaccess.txt                         text eol=lf
+
+# File binari: nessuna conversione
+*.png  binary
+*.jpg  binary
+*.jpeg binary
+*.gif  binary
+*.ico  binary
+*.webp binary
+*.pdf  binary
+*.zip  binary
+*.gz   binary
+*.tgz  binary
 *.woff binary
 *.woff2 binary
-*.ttf binary
-*.eot binary
+*.ttf  binary
+*.eot  binary

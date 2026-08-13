@@ -97,6 +97,22 @@ Sono disponibili come servizi facoltativi anche `redis` e `memcached`. Per veder
 procedura di installazione italiana invece di saltarla, imposta `AUTO_INSTALL=0` in
 `docker/.env.docker` e apri `http://localhost:8080/install/`.
 
+### Se il contenitore PHP non parte
+
+Su Windows, un Git configurato per convertire le terminazioni di riga puo' trasformare in CRLF
+lo script di avvio, e il contenitore si ferma con
+`exec /usr/local/bin/docker-opencart-entrypoint: no such file or directory`.
+Il `.gitattributes` del repository impone LF a tutti i file di testo e l'immagine PHP li
+normalizza comunque in fase di costruzione, quindi il problema non dovrebbe presentarsi.
+Se hai clonato prima di questa versione, rinfresca la copia di lavoro e ricostruisci:
+
+```bash
+git rm --cached -r . -q
+git reset --hard
+make build options="--no-cache"
+make up options="--force-recreate"
+```
+
 ## Struttura
 
 | Cartella | Descrizione |

@@ -37,6 +37,9 @@ Prima versione pubblica di **OpenCart ITALIA**, l'edizione italiana di OpenCart 
   vedere la procedura guidata.
 - Servizi facoltativi Adminer, Redis e Memcached, avviabili con `make up profiles="..."`.
 - Impostazioni raccolte in `docker/.env.docker`, creato da `make init`.
+- `.gitattributes` impone terminazioni di riga LF a tutti i file di testo, anche su Windows, e
+  l'immagine PHP normalizza comunque lo script di avvio: senza questo il contenitore PHP si
+  fermava con `exec /usr/local/bin/docker-opencart-entrypoint: no such file or directory`.
 
 ### Marchio
 

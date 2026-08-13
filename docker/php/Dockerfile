@@ -48,7 +48,11 @@ COPY docker/php/supervisor/services/ /etc/supervisor/conf.d/services/
 
 # Avvio
 COPY docker/php/docker-opencart-entrypoint /usr/local/bin/
-RUN chmod +x /usr/local/bin/docker-opencart-entrypoint
+# Se il file arriva da un clone su Windows puo' avere terminazioni CRLF: senza
+# questa normalizzazione Linux non troverebbe l'interprete indicato nella prima riga.
+RUN sed -i 's/\r$//' /usr/local/bin/docker-opencart-entrypoint \
+    && chmod +x /usr/local/bin/docker-opencart-entrypoint \
+    && find /etc/supervisor -type f -exec sed -i 's/\r$//' {} +
 
 WORKDIR /var/www
 

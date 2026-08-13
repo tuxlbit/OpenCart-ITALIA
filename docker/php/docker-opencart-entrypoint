@@ -91,6 +91,7 @@ chmod -R g+w /var/www/system/storage /var/www/image 2>/dev/null || true
 # ----------------------------------------------------------------------
 if [ -f "/var/www/docker/php/cron/crontab" ]; then
 	cp /var/www/docker/php/cron/crontab /etc/cron.d/opencart
+	sed -i 's/\r$//' /etc/cron.d/opencart
 	chmod 0644 /etc/cron.d/opencart
 	touch /var/log/cron.log
 	chown www-data:www-data /var/log/cron.log
