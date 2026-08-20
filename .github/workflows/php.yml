@@ -5,22 +5,32 @@ on:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
+  workflow_dispatch:
 
 permissions:
   contents: read
 
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
+
 jobs:
   sintassi:
-    name: Sintassi PHP
+    name: Sintassi PHP (${{ matrix.php }})
     runs-on: ubuntu-latest
+    timeout-minutes: 20
     strategy:
       fail-fast: false
       matrix:
         php: [ "8.1", "8.2", "8.3" ]
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
 
-      - uses: shivammathur/setup-php@v2
+      - name: Configura PHP
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           php-version: ${{ matrix.php }}
           extensions: mysqli, gd, curl, openssl, zip, mbstring
@@ -35,9 +45,10 @@ jobs:
   installazione:
     name: Installazione su MariaDB
     runs-on: ubuntu-latest
+    timeout-minutes: 30
     services:
       mariadb:
-        image: mariadb:11.4
+        image: mariadb:11.4@sha256:4f1d8d202fcf7bcb3902f63af09f9c1a050c2922a89652f22abaec0d4f015e83
         env:
           MARIADB_ROOT_PASSWORD: root
           MARIADB_DATABASE: opencart
@@ -49,9 +60,13 @@ jobs:
           --health-timeout=5s
           --health-retries=20
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout
+        uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7
+        with:
+          persist-credentials: false
 
-      - uses: shivammathur/setup-php@v2
+      - name: Configura PHP
+        uses: shivammathur/setup-php@f3e473d116dcccaddc5834248c87452386958240 # v2
         with:
           php-version: "8.2"
           extensions: mysqli, gd, curl, openssl, zip, mbstring
